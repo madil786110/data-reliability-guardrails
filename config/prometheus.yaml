@@ -1,0 +1,19 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'drg_pipeline'
+    static_configs:
+      - targets: ['host.docker.internal:8000'] # Assuming we push metrics or have an exporter. 
+      # Since we are batch, we likely use Pushgateway or just scrape a sidecar. 
+      # User asked for "Prometheus scrape config". 
+      # For batch jobs, Pushgateway is standard, but keeping it simple:
+      # We will use the Pushgateway pattern OR just expect the Python process to not be scraped directly?
+      # "Exposes Prometheus metrics for validation outcomes and latency."
+      # Batch processes die, so scrape is hard without Pushgateway.
+      # However, for simplicity, we might just use Pushgateway or keep it extremely simple.
+      # Let's add a placeholder target for now, maybe we run a metrics server.

@@ -1,0 +1,35 @@
+dataset_id: "rides_batch"
+owner: "data_eng_team"
+schema:
+  - name: "ride_id"
+    type: "string"
+    required: true
+  - name: "vendor_id"
+    type: "int"
+    required: true
+  - name: "pickup_datetime"
+    type: "datetime"
+    required: true
+  - name: "dropoff_datetime"
+    type: "datetime"
+    required: true
+  - name: "passenger_count"
+    type: "int"
+    min: 0
+  - name: "trip_distance"
+    type: "float"
+    min: 0.0
+  - name: "fare_amount"
+    type: "float"
+    min: 0.0
+checks:
+  freshness:
+    max_delay_hours: 24
+  volume:
+    min_rows: 100
+    max_rows: 10000
+  distribution:
+    method: "psi"
+    column: "fare_amount"
+    reference_path: "data/reference/rides_reference.parquet"
+    threshold: 0.2
