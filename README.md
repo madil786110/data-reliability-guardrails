@@ -1,4 +1,4 @@
-# Data Reliability Guardrails (`drg`)
+# About Data Reliability Guardrails (`drg`)
 
 > "A local-first guardrail system that prevents silent data failures in batch pipelines."
 
